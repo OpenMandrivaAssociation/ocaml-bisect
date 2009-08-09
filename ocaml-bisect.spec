@@ -3,7 +3,7 @@
 
 Name:           ocaml-bisect
 Version:        %{mainversion}
-Release:        %mkrel 1
+Release:        0.%{subversion}.%mkrel 1
 Summary:        OCaml code coverage tool
 License:        GPLv3
 Group:          Development/Other
