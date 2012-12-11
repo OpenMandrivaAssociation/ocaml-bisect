@@ -1,16 +1,13 @@
-%define mainversion 1.0
-%define subversion beta
-
 Name:           ocaml-bisect
-Version:        %{mainversion}
-Release:        %mkrel 3.%{subversion}.2
+Version:        1.2
+Release:        1
 Summary:        OCaml code coverage tool
 License:        GPLv3
 Group:          Development/Other
 URL:            http://bisect.x9c.fr/
-Source0:        http://bisect.x9c.fr/distrib/bisect-%{version}-%{subversion}.tar.gz
+Source0:        http://bisect.x9c.fr/distrib/bisect-%{version}.tar.gz
 Source1:        http://bisect.x9c.fr/distrib/bisect.pdf
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  camlp4
 
@@ -31,24 +28,25 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n bisect-%{version}-%{subversion}
+%setup -q -n bisect-%{version}
 
 %build
-make all
+sh configure
+make all doc
 
 %install
-rm -rf %{buildroot}
+export DESTDIR=%{buildroot}
+export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+export PATH_OCAML_BIN=%{_bindir}
+mkdir -p $OCAMLFIND_DESTDIR/bisect
+make install PATH_OCAML_BIN=%{_bindir}
+
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}/ocaml/bisect
 
-install -m 0755 bin/bisect-report.opt  %{buildroot}%{_bindir}/bisect-report
+install -m 0755 _build/src/report/report.native  %{buildroot}%{_bindir}/bisect-report
 strip %{buildroot}%{_bindir}/bisect-report
 
-install -m 0644 bin/*.{a,cmi,cma,cmx,cmxa}  %{buildroot}%{_libdir}/ocaml/bisect
-
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -57,6 +55,9 @@ rm -rf %{buildroot}
 %{_bindir}/bisect-report
 %{_libdir}/ocaml/bisect/*.cma
 %{_libdir}/ocaml/bisect/*.cmi
+%{_libdir}/ocaml/bisect/META
+%{_libdir}/ocaml/bisect/*.cmo
+
 
 %files devel
 %defattr(-,root,root)
@@ -64,4 +65,18 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/bisect/*.a
 %{_libdir}/ocaml/bisect/*.cmxa
 %{_libdir}/ocaml/bisect/*.cmx
+
+
+
+%changelog
+* Sun Aug 09 2009 Florent Monnier <blue_prawn@mandriva.org> 1.0-3.beta.1mdv2010.0
++ Revision: 413656
+- try to fix release field
+- new increment
+- incremented mkrel number
+- corrected release field
+
+* Sun Aug 09 2009 Florent Monnier <blue_prawn@mandriva.org> 1.0-1mdv2010.0
++ Revision: 412952
+- spec file made from the fedora's one by Richard Jones
 
