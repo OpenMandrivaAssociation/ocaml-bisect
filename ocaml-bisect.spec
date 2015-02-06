@@ -1,6 +1,6 @@
 Name:           ocaml-bisect
 Version:        1.2
-Release:        1
+Release:        2
 Summary:        OCaml code coverage tool
 License:        GPLv3
 Group:          Development/Other
