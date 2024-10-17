@@ -4,7 +4,7 @@ Release:        2
 Summary:        OCaml code coverage tool
 License:        GPLv3
 Group:          Development/Other
-URL:            http://bisect.x9c.fr/
+URL:            https://bisect.x9c.fr/
 Source0:        http://bisect.x9c.fr/distrib/bisect-%{version}.tar.gz
 Source1:        http://bisect.x9c.fr/distrib/bisect.pdf
 BuildRequires:  ocaml
