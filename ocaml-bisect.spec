@@ -7,6 +7,7 @@ Group:          Development/Other
 URL:            https://bisect.x9c.fr/
 Source0:        http://bisect.x9c.fr/distrib/bisect-%{version}.tar.gz
 Source1:        http://bisect.x9c.fr/distrib/bisect.pdf
+BuildRequires:	make
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  camlp4
